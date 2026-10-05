@@ -1,0 +1,49 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'ir.laitno.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "ir.laitno.app"
+        minSdk 24
+        targetSdk 34
+        versionCode 13909
+        versionName "13.9.9"
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('laitno-release.jks')
+            storePassword System.getenv('KEYSTORE_PASS') ?: 'laitno_release_key'
+            keyAlias System.getenv('KEY_ALIAS') ?: 'laitno'
+            keyPassword System.getenv('KEY_PASS') ?: 'laitno_release_key'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+        }
+        debug {
+            debuggable true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    androidResources {
+        noCompress 'html', 'js'
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.11.0'
+    implementation 'androidx.core:core:1.13.1'
+}
