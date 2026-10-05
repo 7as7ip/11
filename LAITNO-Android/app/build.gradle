@@ -1,0 +1,38 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'ir.laitno.app'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "ir.laitno.app"
+        minSdk 24
+        targetSdk 34
+        versionCode 13909
+        versionName "13.9.9"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            // برای نسخهٔ release، امضا را در Android Studio از Build > Generate Signed APK بساز
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    // فایل HTML بزرگ است (فونت و دیتا داخلش هست)؛ فشرده نشود تا سریع‌تر لود شود
+    androidResources {
+        noCompress 'html', 'js'
+    }
+}
+
+dependencies {
+    implementation 'androidx.webkit:webkit:1.11.0'
+    implementation 'androidx.core:core:1.13.1'
+}
